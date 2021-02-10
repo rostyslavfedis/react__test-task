@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import Episodes from "./pages/Episodes";
+import Locations from "./pages/Locations";
+import {WatchList} from "./pages/WatchList";
+import {Navigation} from "./components/Navbar/Navigation" ;
+import Characters from "./pages/Characters";
+import SoloChar from "./components/SoloChars/SoloChar";
+
+
+
+export default function App(props) {
+
+        return (
+            <Router>
+                <Navigation/>
+            <div className='container pt-4'>
+               <Switch>
+                   <Route path='/chars' exact {...props} component={Characters}/>
+                   <Route path='/episodes' exact {...props} component={Episodes}/>
+                   <Route path='/locations' exact {...props} component={Locations}/>
+
+                   <Route path="/chars/:id" {...props} component={SoloChar}/>
+               </Switch>
+            </div>
+            </Router>
+
+        );
 }
 
-export default App;
+
+
+
+
